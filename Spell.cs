@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Autofac.Extras.DynamicProxy;
 
 namespace spell_check
 {
+    [Intercept(typeof(LoggerInterceptor))]
     public  class Spell
     {
         private const string Letters = "abcdefghijklmnopqrstuvwxyz";
@@ -45,7 +47,7 @@ namespace spell_check
             return lst;
         }
 
-        private  Dictionary<string, string> Splits(string word)
+        private Dictionary<string, string> Splits(string word)
         {
             var dict = new Dictionary<string, string>();
             for (int i = 0; i < word.Length + 1; i++)

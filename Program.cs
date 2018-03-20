@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Autofac;
 
 namespace spell_check
 {
@@ -8,7 +9,12 @@ namespace spell_check
     {
         static void Main(string[] args)
         {
-            var word = Console.ReadLine();
+            var autofac = new AutoFac();
+            var _container = autofac.AutoFacInit();
+            var spells = _container.Resolve<Spell>();
+            spells.EditsForWord("somthing");
+
+            var word = "somthing";//Console.ReadLine();
             var words = new Words(word);
             var spell = new Spell(words.words);
             var edits = spell.EditsForWord(word);

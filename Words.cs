@@ -29,10 +29,6 @@ namespace spell_check
             var dict = new Dictionary<string, int>();
             for (int i = 0; i < file.Length; i++)
             {
-                if (file[i] == "soothing")
-                {
-                    var z = 0;
-                }
                 if (!dict.ContainsKey(file[i]))
                 {
                     dict.Add(file[i], 0);
