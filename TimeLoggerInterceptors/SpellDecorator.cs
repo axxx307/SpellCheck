@@ -24,7 +24,7 @@ namespace spell_check
 
         private async void WriteCharacters(TimeSpan time, string methodName)
         {
-            using (FileStream stream = new FileStream(@"Performance.txt", FileMode.Append, FileAccess.Write, FileShare.None, bufferSize:4096, useAsync: true))
+            using (FileStream stream = new FileStream(@"TimeLoggerInterceptors\Performance.txt", FileMode.Append, FileAccess.Write, FileShare.None, bufferSize:4096, useAsync: true))
             {
                 var text = $"{methodName} -- {time} \n";
                 await stream.WriteAsync(System.Text.Encoding.ASCII.GetBytes(text), 0, text.Length);
