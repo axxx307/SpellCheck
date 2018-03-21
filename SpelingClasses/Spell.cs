@@ -4,14 +4,10 @@ using Autofac.Extras.DynamicProxy;
 
 namespace spell_check
 {
-    [Intercept(typeof(LoggerInterceptor))]
+    [Intercept(typeof(SpellDecorator))]
     public  class Spell
     {
         private const string Letters = "abcdefghijklmnopqrstuvwxyz";
-        
-        public Spell()
-        {
-        }
 
         public double Probability(string word, Dictionary<string, int> dict)
         {
@@ -30,7 +26,7 @@ namespace spell_check
         {
             return l.SelectMany(x=>words.Where(z=>z == x)).ToList();
         }
-        public  List<string> EditsForWord(string word)
+        public List<string> EditsForWord(string word)
         {
             var deletes = Deletes(word);
             var transposes = Transposes(word);
@@ -55,18 +51,18 @@ namespace spell_check
             }
             return dict;
         }
-
-        protected virtual List<string> Deletes(string word)
+        
+        public virtual string[] Deletes(string word)
         {
-            var list = new List<string>();
-            foreach (var letter in word)
+            var array = new string[word.Length];
+            for (int i = 0; i < word.Length; i++)
             {
-                list.Add(word.Remove(word.IndexOf(letter), 1));
+                array[i] = word.Remove(i, 1);
             }
-            return list;
+            return array;
         }
 
-        protected virtual List<string> Transposes(string word)
+        public virtual List<string> Transposes(string word)
         {
             var list = new List<string>();
             var w = word.ToList();

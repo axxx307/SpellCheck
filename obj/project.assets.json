@@ -50,18 +50,6 @@
           "lib/netstandard1.3/Castle.Core.dll": {}
         }
       },
-      "Castle.DynamicProxy/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Castle.Core": "[1.2.0]"
-        },
-        "compile": {
-          "lib/Castle.DynamicProxy2.dll": {}
-        },
-        "runtime": {
-          "lib/Castle.DynamicProxy2.dll": {}
-        }
-      },
       "Microsoft.NETCore.App/2.0.0": {
         "type": "package",
         "dependencies": {
@@ -906,16 +894,6 @@
         "lib/netstandard1.3/Castle.Core.dll",
         "lib/netstandard1.3/Castle.Core.xml",
         "readme.txt"
-      ]
-    },
-    "Castle.DynamicProxy/2.2.0": {
-      "sha512": "3eiJiPYF7wK0CmHn47d56kbJLfvTGfLZ8D5G1dLLRbCo8h28gn6qkKTxFk/65FDz9zeUqWWmpZ3SAwhbpOr1sw==",
-      "type": "package",
-      "path": "castle.dynamicproxy/2.2.0",
-      "files": [
-        "castle.dynamicproxy.2.2.0.nupkg.sha512",
-        "castle.dynamicproxy.nuspec",
-        "lib/Castle.DynamicProxy2.dll"
       ]
     },
     "Microsoft.NETCore.App/2.0.0": {
@@ -3553,34 +3531,35 @@
       "Autofac >= 4.6.2",
       "Autofac.Extras.DynamicProxy >= 4.4.0",
       "Castle.Core >= 4.2.1",
-      "Castle.DynamicProxy >= 2.2.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Newtonsoft.Json >= 11.0.1"
     ]
   },
   "packageFolders": {
-    "/Users/markparfenov/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\Mark\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/markparfenov/Desktop/spell check/spell check.csproj",
+      "projectUniqueName": "C:\\Users\\Mark\\Desktop\\SpellCheck\\spell check.csproj",
       "projectName": "spell check",
-      "projectPath": "/Users/markparfenov/Desktop/spell check/spell check.csproj",
-      "packagesPath": "/Users/markparfenov/.nuget/packages/",
-      "outputPath": "/Users/markparfenov/Desktop/spell check/obj/",
+      "projectPath": "C:\\Users\\Mark\\Desktop\\SpellCheck\\spell check.csproj",
+      "packagesPath": "C:\\Users\\Mark\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mark\\Desktop\\SpellCheck\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/markparfenov/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Mark\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3609,10 +3588,6 @@
             "target": "Package",
             "version": "[4.2.1, )"
           },
-          "Castle.DynamicProxy": {
-            "target": "Package",
-            "version": "[2.2.0, )"
-          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "[2.0.0, )",
@@ -3630,27 +3605,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: Castle.DynamicProxy 2.2.0 requires Castle.Core (= 1.2.0) but version Castle.Core 4.2.1 was resolved.",
-      "libraryId": "Castle.Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Castle.DynamicProxy 2.2.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Castle.DynamicProxy",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.0"
-      ]
-    }
-  ]
+  }
 }

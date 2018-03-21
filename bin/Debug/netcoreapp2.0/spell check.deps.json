@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "d3a98aba3adf0c90d2dbc51a55becb1912b08c0f"
+    "signature": "11c18116ee8e0506d251c193ded9e819149a7cfb"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,7 +11,6 @@
           "Autofac": "4.6.2",
           "Autofac.Extras.DynamicProxy": "4.4.0",
           "Castle.Core": "4.2.1",
-          "Castle.DynamicProxy": "2.2.0",
           "Newtonsoft.Json": "11.0.1"
         },
         "runtime": {
@@ -49,14 +48,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Castle.Core.dll": {}
-        }
-      },
-      "Castle.DynamicProxy/2.2.0": {
-        "dependencies": {
-          "Castle.Core": "4.2.1"
-        },
-        "runtime": {
-          "lib/Castle.DynamicProxy2.dll": {}
         }
       },
       "Microsoft.NETCore.Targets/1.1.0": {},
@@ -445,13 +436,6 @@
       "sha512": "sha512-XSNA0Gc1Zu33L+8+/3Tqt+aFu8QWS8UenVHZ7RenIP5wJfhoLrA4PnNscpxReeo5aBq8PDoGnV8rNaOzIOUo/w==",
       "path": "castle.core/4.2.1",
       "hashPath": "castle.core.4.2.1.nupkg.sha512"
-    },
-    "Castle.DynamicProxy/2.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3eiJiPYF7wK0CmHn47d56kbJLfvTGfLZ8D5G1dLLRbCo8h28gn6qkKTxFk/65FDz9zeUqWWmpZ3SAwhbpOr1sw==",
-      "path": "castle.dynamicproxy/2.2.0",
-      "hashPath": "castle.dynamicproxy.2.2.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Targets/1.1.0": {
       "type": "package",

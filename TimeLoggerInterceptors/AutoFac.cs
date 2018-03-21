@@ -9,8 +9,8 @@ namespace spell_check
         public IContainer AutoFacInit()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<Spell>().EnableClassInterceptors().InterceptedBy(typeof(LoggerInterceptor));
-            builder.Register(c => new LoggerInterceptor());
+            builder.RegisterType<Spell>().EnableClassInterceptors().InterceptedBy(typeof(SpellDecorator));
+            builder.Register(c => new SpellDecorator(new Spell()));
             var container = builder.Build();
             return container;
         }

@@ -1,25 +1,25 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using Castle.DynamicProxy;
 
 namespace spell_check
 {
-    public class LoggerInterceptor: IInterceptor
+    class SpellDecorator: DynamicDecorator<Spell>
     {
-        public LoggerInterceptor()
+        public SpellDecorator(Spell component): base(component)
         {
-
+            
         }
 
-        public void Intercept(IInvocation invocation)
+        public virtual string[] Deletes(string word)
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            invocation.Proceed();
+            var deletes = Component.Deletes(word);
             stopWatch.Stop();
-            WriteCharacters(stopWatch.Elapsed, invocation.Method.Name);
+            WriteCharacters(stopWatch.Elapsed, "Deletes");
+            return deletes;
         }
 
         private async void WriteCharacters(TimeSpan time, string methodName)
@@ -27,7 +27,7 @@ namespace spell_check
             using (FileStream stream = new FileStream(@"Performance.txt", FileMode.Append, FileAccess.Write, FileShare.None, bufferSize:4096, useAsync: true))
             {
                 var text = $"{methodName} -- {time} \n";
-                await stream.WriteAsync(Encoding.ASCII.GetBytes(text), 0, text.Length);
+                await stream.WriteAsync(System.Text.Encoding.ASCII.GetBytes(text), 0, text.Length);
             }
         }
     }

@@ -8,3 +8,14 @@
 /Users/markparfenov/Desktop/spell check/obj/Debug/netcoreapp2.0/spell check.AssemblyInfo.cs
 /Users/markparfenov/Desktop/spell check/obj/Debug/netcoreapp2.0/spell check.dll
 /Users/markparfenov/Desktop/spell check/obj/Debug/netcoreapp2.0/spell check.pdb
+C:\Users\Mark\Desktop\SpellCheck\bin\Debug\netcoreapp2.0\spell check.deps.json
+C:\Users\Mark\Desktop\SpellCheck\bin\Debug\netcoreapp2.0\spell check.runtimeconfig.json
+C:\Users\Mark\Desktop\SpellCheck\bin\Debug\netcoreapp2.0\spell check.runtimeconfig.dev.json
+C:\Users\Mark\Desktop\SpellCheck\bin\Debug\netcoreapp2.0\spell check.dll
+C:\Users\Mark\Desktop\SpellCheck\bin\Debug\netcoreapp2.0\spell check.pdb
+C:\Users\Mark\Desktop\SpellCheck\obj\Debug\netcoreapp2.0\spell check.csproj.CoreCompileInputs.cache
+C:\Users\Mark\Desktop\SpellCheck\obj\Debug\netcoreapp2.0\spell check.AssemblyInfoInputs.cache
+C:\Users\Mark\Desktop\SpellCheck\obj\Debug\netcoreapp2.0\spell check.AssemblyInfo.cs
+C:\Users\Mark\Desktop\SpellCheck\obj\Debug\netcoreapp2.0\spell check.dll
+C:\Users\Mark\Desktop\SpellCheck\obj\Debug\netcoreapp2.0\spell check.pdb
+C:\Users\Mark\Desktop\SpellCheck\obj\Debug\netcoreapp2.0\spell check.csprojResolveAssemblyReference.cache

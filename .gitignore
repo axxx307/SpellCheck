@@ -1,0 +1,5 @@
+obj/Debug/
+obj/project.assets.json
+obj/spell check.csproj.nuget.cache
+obj/spell check.csproj.nuget.g.props
+obj/spell check.csproj.nuget.g.targets

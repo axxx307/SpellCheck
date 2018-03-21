@@ -20,12 +20,12 @@ namespace spell_check
 
         private void GetWords(string word)
         {
-            words =  File.ReadAllLines("words.txt").Select(x=>x.Replace(@"\", "")).ToList();
+            words =  File.ReadAllLines(@"TextFiles\words.txt").Select(x=>x.Replace(@"\", "")).ToList();
         }
 
         private void Counter()
         {
-            var file = File.ReadAllLines("big.txt").SelectMany(x=>x.Split(" ")).ToArray();
+            var file = File.ReadAllLines(@"TextFiles\big.txt").SelectMany(x=>x.Split(" ")).ToArray();
             var dict = new Dictionary<string, int>();
             for (int i = 0; i < file.Length; i++)
             {
