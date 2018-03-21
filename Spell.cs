@@ -9,11 +9,8 @@ namespace spell_check
     {
         private const string Letters = "abcdefghijklmnopqrstuvwxyz";
         
-        private List<string> Words;
-
-        public Spell(List<string> words)
+        public Spell()
         {
-            Words = words;
         }
 
         public double Probability(string word, Dictionary<string, int> dict)
@@ -29,9 +26,9 @@ namespace spell_check
             return el;
         }
 
-        public List<string> Known(List<string> l)
+        public List<string> Known(List<string> l, List<string> words)
         {
-            return l.SelectMany(x=>Words.Where(z=>z == x)).ToList();
+            return l.SelectMany(x=>words.Where(z=>z == x)).ToList();
         }
         public  List<string> EditsForWord(string word)
         {
@@ -59,7 +56,7 @@ namespace spell_check
             return dict;
         }
 
-        private  List<string> Deletes(string word)
+        protected virtual List<string> Deletes(string word)
         {
             var list = new List<string>();
             foreach (var letter in word)
@@ -69,7 +66,7 @@ namespace spell_check
             return list;
         }
 
-        private  List<string> Transposes(string word)
+        protected virtual List<string> Transposes(string word)
         {
             var list = new List<string>();
             var w = word.ToList();

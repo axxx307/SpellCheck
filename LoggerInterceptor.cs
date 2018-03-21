@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using Castle.DynamicProxy;
 
 namespace spell_check
@@ -23,9 +24,10 @@ namespace spell_check
 
         private async void WriteCharacters(TimeSpan time, string methodName)
         {
-            using (StreamWriter writer = File.CreateText("newfile.txt"))
+            using (FileStream stream = new FileStream(@"Performance.txt", FileMode.Append, FileAccess.Write, FileShare.None, bufferSize:4096, useAsync: true))
             {
-                await writer.WriteAsync($"{methodName} -- {time}");
+                var text = $"{methodName} -- {time} \n";
+                await stream.WriteAsync(Encoding.ASCII.GetBytes(text), 0, text.Length);
             }
         }
     }
