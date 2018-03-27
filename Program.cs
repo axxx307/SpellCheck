@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
+using spell_check.SpelingClasses;
 
 namespace spell_check
 {
@@ -15,23 +16,10 @@ namespace spell_check
             var words = new Words();
 
             Console.WriteLine("Enter word");
-            var input = Console.ReadLine();
-            var edits = spells.EditsForWord(input);
-            var known = spells.Known(edits, words.words);
-            var candidates = new List<string>();
-            candidates.AddRange(known);
-            candidates.AddRange(spells.Known(new List<string> { input }, words.words));
-            candidates.Add(input);
-            var f = new Dictionary<string, double>();
-            foreach (var itemf in candidates)
-            {
-                if (!f.ContainsKey(itemf))
-                {
-                    f.Add(itemf, spells.Probability(itemf, words.counter));
-                }
-            }
-            var item = f.FirstOrDefault(z=>z.Value == f.Values.Max()).Key;
-            Console.WriteLine(item);
+            // var input = Console.ReadLine();
+            CorrectionTest.TestAgainstWords();
+            // var candidate = spells.Candidates(input, words);
+            // Console.WriteLine(candidate);
         }
     }
 }
