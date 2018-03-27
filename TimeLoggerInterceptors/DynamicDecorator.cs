@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace spell_check
 {
@@ -154,8 +155,21 @@ namespace spell_check
 
             if (method != null)
             {
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
                 invocation.ReturnValue = method.Invoke(_component, invocation.Arguments);
+                stopWatch.Stop();
+                WriteCharacters(stopWatch.Elapsed, method.Name);
                 return;
+            }
+        }
+
+        private async void WriteCharacters(TimeSpan time, string methodName)
+        {
+            using (FileStream stream = new FileStream(@"TimeLoggerInterceptors\Performance.txt", FileMode.Append, FileAccess.Write, FileShare.None, bufferSize:4096, useAsync: true))
+            {
+                var text = $"{methodName} -- {time} \n";
+                await stream.WriteAsync(System.Text.Encoding.ASCII.GetBytes(text), 0, text.Length);
             }
         }
 

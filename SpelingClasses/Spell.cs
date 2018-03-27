@@ -28,28 +28,12 @@ namespace spell_check
         }
         public List<string> EditsForWord(string word)
         {
-            var deletes = Deletes(word);
-            var transposes = Transposes(word);
-            var replaces = Replaces(word);
-            var inserts = Inserts(word);
             var lst = new List<string>();
-            lst.AddRange(deletes);
-            lst.AddRange(transposes);
-            lst.AddRange(replaces);
-            lst.AddRange(inserts);
+            lst.AddRange(Deletes(word));
+            lst.AddRange(Transposes(word));
+            lst.AddRange(Replaces(word));
+            lst.AddRange(Inserts(word));
             return lst;
-        }
-
-        private Dictionary<string, string> Splits(string word)
-        {
-            var dict = new Dictionary<string, string>();
-            for (int i = 0; i < word.Length + 1; i++)
-            {
-                var subLeft = word.Substring(0, i);
-                var subRight = word.Substring(i, word.Length - i);
-                dict.Add(subLeft, subRight);
-            }
-            return dict;
         }
         
         public virtual string[] Deletes(string word)
@@ -62,10 +46,9 @@ namespace spell_check
             return array;
         }
 
-        public virtual List<string> Transposes(string word)
+        public virtual string[] Transposes(string word)
         {
-            var list = new List<string>();
-            var w = word.ToList();
+            var arr = new string[word.Length];
             for (int i = 0; i < word.Length; i++)
             {
                 var str = word;
@@ -79,40 +62,54 @@ namespace spell_check
                     str = str.Remove(indexL, 1);
                     str = str.Insert(indexL, right.ToString());
                     str = str.Insert(indexR, left.ToString());
-                    list.Add(str);    
+                    arr[i] = str;
                 }
             }
-            return list;
+            return arr;
         }
 
-        private  List<string> Replaces(string word)
+        public virtual string[] Replaces(string word)
         {
-            var list = new List<string>();
-            word.ToList().ForEach(x=>
+            var arr = new string[word.Length * Letters.Length];
+            var index = 0;
+            for (int i = 0; i < word.Length; i++)
             {
-                var index = word.IndexOf(x);
-                for (int i = 0; i < Letters.Length; i++)
+                var str = word.Clone().ToString();
+                str = str.Remove(i, 1);
+                for (int j = 0; j < Letters.Length; j++)
                 {
-                    var str = word;
-                    str = str.Remove(index, 1);
-                    list.Add(str.Insert(index, Letters[i].ToString()));
+                    arr[index] = str.Insert(i, Letters[j].ToString());
+                    index++;
                 }
-            });
-            return list;
+            };
+            return arr;
         }
 
-        private  List<string> Inserts(string word)
+        public virtual string[] Inserts(string word)
         {
-            var lst = new List<string>();
-            word.ToList().ForEach(x=>
+            var arr = new string[word.Length * Letters.Length];
+            var index = 0;
+            for (int i = 0; i < word.Length; i++)
             {
-                var index = word.IndexOf(x);
-                for (int i = 0; i < Letters.Length; i++)
+                for (int j = 0; j < Letters.Length; j++)
                 {
-                    lst.Add(word.Insert(index, Letters[i].ToString()));
+                    arr[index] = word.Insert(i, Letters[j].ToString());
+                    index++;
                 }
-            });
-            return lst;
+            };
+            return arr;
         }
+
+                // private Dictionary<string, string> Splits(string word)
+        // {
+        //     var dict = new Dictionary<string, string>();
+        //     for (int i = 0; i < word.Length + 1; i++)
+        //     {
+        //         var subLeft = word.Substring(0, i);
+        //         var subRight = word.Substring(i, word.Length - i);
+        //         dict.Add(subLeft, subRight);
+        //     }
+        //     return dict;
+        // }
     }
 }

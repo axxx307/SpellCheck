@@ -32,9 +32,6 @@ namespace spell_check
             }
             var item = f.FirstOrDefault(z=>z.Value == f.Values.Max()).Key;
             Console.WriteLine(item);
-            // way to much variants, need to check implementation
-            // var edits2 = spell.Edits2(edits);
-            // var know2 = spell.Known(edits2);
         }
     }
 }
