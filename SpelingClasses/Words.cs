@@ -12,13 +12,13 @@ namespace spell_check
         public List<string> words;
         public Dictionary<string, int> counter;
 
-        public Words(string word) 
+        public Words() 
         {
-            GetWords(word);
+            GetWords();
             Counter();
         } 
 
-        private void GetWords(string word)
+        private void GetWords()
         {
             words =  File.ReadAllLines(@"TextFiles\words.txt").Select(x=>x.Replace(@"\", "")).ToList();
         }

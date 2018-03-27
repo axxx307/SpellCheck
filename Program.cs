@@ -12,16 +12,16 @@ namespace spell_check
             var autofac = new AutoFac();
             var _container = autofac.AutoFacInit();
             var spells = _container.Resolve<Spell>();
+            var words = new Words();
 
-            var word = "somthing";
-            var words = new Words(word);
-            var spell = new Spell();
-            var edits = spells.EditsForWord("somthing");
+            Console.WriteLine("Enter word");
+            var input = Console.ReadLine();
+            var edits = spells.EditsForWord(input);
             var known = spells.Known(edits, words.words);
             var candidates = new List<string>();
             candidates.AddRange(known);
-            candidates.AddRange(spells.Known(new List<string> {word}, words.words));
-            candidates.Add(word);
+            candidates.AddRange(spells.Known(new List<string> { input }, words.words));
+            candidates.Add(input);
             var f = new Dictionary<string, double>();
             foreach (var itemf in candidates)
             {
