@@ -17,9 +17,13 @@ namespace spell_check
 
             Console.WriteLine("Enter word");
             // var input = Console.ReadLine();
-            CorrectionTest.TestAgainstWords();
-            // var candidate = spells.Candidates(input, words);
-            // Console.WriteLine(candidate);
+            var sym = new SymSpell(1);
+            while (true)
+            {
+                var word = Console.ReadLine();
+                var length = sym.P(word);
+                Console.WriteLine(length);
+            }
         }
     }
 }
