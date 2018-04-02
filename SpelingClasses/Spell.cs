@@ -4,6 +4,7 @@ using Autofac.Extras.DynamicProxy;
 
 namespace spell_check
 {
+    //Adapted to C# Peter`s Norvig algorithm based on deletes, transposes, replaces and inserts.
     [Intercept(typeof(SpellDecorator))]
     public  class Spell
     {
@@ -18,6 +19,8 @@ namespace spell_check
 
         public string Candidates(string word, Words words)
         {
+            var check = CheckAgainstDictionary(word, words.words);
+            if (!string.IsNullOrWhiteSpace(check)) return check;
             var edits = EditsForWord(word);
             var known = Known(edits, words.words);
             var candidates = new List<string>();
@@ -111,6 +114,11 @@ namespace spell_check
                 }
             };
             return arr;
+        }
+
+        public string CheckAgainstDictionary(string word, List<string> words)
+        {
+            return words.Find(f=>f == word);
         }
 
                 // private Dictionary<string, string> Splits(string word)

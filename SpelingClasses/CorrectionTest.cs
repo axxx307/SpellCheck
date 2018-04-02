@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace spell_check.SpelingClasses
             return dict;
         }
 
-        public static void TestAgainstWords()
+        public static Tuple<int, int> TestAgainstWords()
         {
             var cases = LoadData();
             var spell = new Spell();
@@ -44,7 +45,7 @@ namespace spell_check.SpelingClasses
                     wrong++;
                 }
             }
-            System.Console.WriteLine($"wrongs are {wrong}, rights are {right}");
+            return Tuple.Create(right, wrong);
         }
     }
 }
