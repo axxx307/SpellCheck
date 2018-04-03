@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using ShellProgressBar;
 
 namespace spell_check.SpelingClasses
 {
@@ -16,18 +17,21 @@ namespace spell_check.SpelingClasses
         public SymSpell(int editDistance)
         {
             _editDistance = editDistance;
+            _generatedEdtis = new Dictionary<string, List<string>>();
+            _generatedFrequencies = new Dictionary<string, long>();
             LoadFrequencies();
             for (int i = 0; i < _generatedFrequencies.Count; i++)
             {
-                AddWordToDictionary(_generatedFrequencies.ElementAt(i).Key);
-            }
+                AddWordToDictionary(_generatedFrequencies.ElementAt(i).Key, null);
+            } 
             Console.WriteLine("SymSpell files loaded successfully");
         }
 
         public string LookUp(string word)
         {
             if (_generatedFrequencies.ContainsKey(word)) return word;
-            var deletes = GenerateEditsForWord(word, new string[] {}, 0);
+            var size = word.Length * (word.Length - 1) / 2;
+            var deletes = GenerateEditsForWord(word, null, new string[size], 0);
             for (int i = 0; i < deletes.Length; i++)
             {
                 if (_generatedEdtis.ContainsKey(deletes[i]))
@@ -46,9 +50,9 @@ namespace spell_check.SpelingClasses
             return "Not found";
         }
 
-        private string[] GenerateEditsForWord(string word, string[] arr, int k)
+        private string[] GenerateEditsForWord(string word, string editedWord, string[] arr, int k)
         {
-            var deletes = Deletes(word);
+            var deletes = editedWord != null ? Deletes(editedWord) : Deletes(word);
             for (int i = 0; i < deletes.Length; i++)
             {
                 var distance = DamerauLevenshtein.Distance(word, deletes[i]);
@@ -59,14 +63,14 @@ namespace spell_check.SpelingClasses
 
                 arr[k] = deletes[i];
                 k++;
-                GenerateEditsForWord(deletes[i], arr, k);
+                GenerateEditsForWord(word, deletes[i], arr, k);
             }
             return arr;
         }
         
-        private void AddWordToDictionary(string word)
+        private void AddWordToDictionary(string word, string editedWord)
         {
-            var deletes = Deletes(word);
+            var deletes = editedWord != null ? Deletes(editedWord) : Deletes(word);
             for (int i = 0; i < deletes.Length; i++)
             {
                 var distance = DamerauLevenshtein.Distance(word, deletes[i]);
@@ -83,7 +87,7 @@ namespace spell_check.SpelingClasses
                 {
                     _generatedEdtis.Add(deletes[i], new List<string>(){word});
                 }
-                AddWordToDictionary(deletes[i]);
+                AddWordToDictionary(word, deletes[i]);
             }
         }
 
@@ -103,7 +107,7 @@ namespace spell_check.SpelingClasses
             for (long i = 0; i < lines.Length; i++)
             {
                 var wordF = lines[i].Split(" ");
-                Console.WriteLine(wordF[0] +"  "+ long.Parse(wordF[1]));
+                if (wordF.Length < 2) continue;
                 _generatedFrequencies.Add(wordF[0], long.Parse(wordF[1]));
             }
         }

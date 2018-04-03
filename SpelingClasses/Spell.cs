@@ -4,6 +4,7 @@ using Autofac.Extras.DynamicProxy;
 
 namespace spell_check
 {
+    //Adapted to C# Peter`s Norvig algorithm based on deletes, transposes, replaces and inserts.
     [Intercept(typeof(SpellDecorator))]
     public  class Spell
     {
@@ -16,10 +17,25 @@ namespace spell_check
             return (double) dict[word] / sum;
         }
 
-        public List<string> Edits2(List<string> edits)
+        public string Candidates(string word, Words words)
         {
-            var el = edits.SelectMany(x=>EditsForWord(x)).ToList();
-            return el;
+            var check = CheckAgainstDictionary(word, words.words);
+            if (!string.IsNullOrWhiteSpace(check)) return check;
+            var edits = EditsForWord(word);
+            var known = Known(edits, words.words);
+            var candidates = new List<string>();
+            candidates.AddRange(known);
+            candidates.AddRange(Known(new List<string> { word }, words.words));
+            candidates.Add(word);
+            var f = new Dictionary<string, double>();
+            foreach (var itemf in candidates)
+            {
+                if (!f.ContainsKey(itemf))
+                {
+                    f.Add(itemf, Probability(itemf, words.counter));
+                }
+            }
+            return f.FirstOrDefault(z=>z.Value == f.Values.Max()).Key;
         }
 
         public List<string> Known(List<string> l, List<string> words)
@@ -98,6 +114,11 @@ namespace spell_check
                 }
             };
             return arr;
+        }
+
+        public string CheckAgainstDictionary(string word, List<string> words)
+        {
+            return words.Find(f=>f == word);
         }
 
                 // private Dictionary<string, string> Splits(string word)

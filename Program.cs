@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
+using spell_check.SpelingClasses;
 
 namespace spell_check
 {
@@ -13,25 +14,45 @@ namespace spell_check
             var _container = autofac.AutoFacInit();
             var spells = _container.Resolve<Spell>();
             var words = new Words();
+            var symSpell = new SymSpell(2);
 
-            Console.WriteLine("Enter word");
-            var input = Console.ReadLine();
-            var edits = spells.EditsForWord(input);
-            var known = spells.Known(edits, words.words);
-            var candidates = new List<string>();
-            candidates.AddRange(known);
-            candidates.AddRange(spells.Known(new List<string> { input }, words.words));
-            candidates.Add(input);
-            var f = new Dictionary<string, double>();
-            foreach (var itemf in candidates)
+            var isRunning = true;
+            while (isRunning)
             {
-                if (!f.ContainsKey(itemf))
+                Console.WriteLine("Enter mode");
+                var mode = Console.ReadLine();
+                switch (mode)
                 {
-                    f.Add(itemf, spells.Probability(itemf, words.counter));
+                    case @"\test":
+                    {
+                        Console.WriteLine("Starting tests");
+                        var data = CorrectionTest.TestAgainstWords();
+                        Console.WriteLine($"Right: {data.Item1}; Wrong: {data.Item2}");
+                        continue;
+                    }
+                    case @"\norvig":
+                    {
+                        Console.WriteLine("Enter the word");
+                        var word = Console.ReadLine();
+                        var spelling = spells.Candidates(word, words);
+                        Console.WriteLine($"Corrected to: {spelling}");
+                        continue;   
+                    }
+                    case @"\symspell":
+                    {
+                        Console.WriteLine("Enter the word");
+                        var word = Console.ReadLine();
+                        var spelling = symSpell.LookUp(word);
+                        Console.WriteLine($"Corrected to: {spelling}");
+                        continue;   
+                    }
+                    case @"\exit":
+                    {
+                        isRunning = false;
+                        break;
+                    }
                 }
-            }
-            var item = f.FirstOrDefault(z=>z.Value == f.Values.Max()).Key;
-            Console.WriteLine(item);
+            }            
         }
     }
 }
