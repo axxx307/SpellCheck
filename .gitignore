@@ -3,3 +3,8 @@ obj/project.assets.json
 obj/spell check.csproj.nuget.cache
 obj/spell check.csproj.nuget.g.props
 obj/spell check.csproj.nuget.g.targets
+bin/Debug/netcoreapp2.0/spell check.runtimeconfig.dev.json
+bin/Debug/netcoreapp2.0/spell check.dll
+bin/Debug/netcoreapp2.0/spell check.pdb
+bin/Debug/netcoreapp2.0/spell check.deps.json
+bin/Debug/netcoreapp2.0/spell check.runtimeconfig.json
