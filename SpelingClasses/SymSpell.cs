@@ -11,7 +11,7 @@ namespace spell_check.SpelingClasses
     public class SymSpell
     {
         private int _editDistance;
-        private int Threshold = 300000;
+        private int Threshold = 0;
         private Dictionary<int, string[]> _generatedEdtis;
         private Dictionary<string, long> _generatedFrequencies;
         public SymSpell(int editDistance)
@@ -27,7 +27,7 @@ namespace spell_check.SpelingClasses
         {
             if (_generatedFrequencies.ContainsKey(word)) return word;
             var size = word.Length * (word.Length - 1) / 2;
-            var deletes = GenerateEditsForWord(word, null, new HashSet<string>());
+            var deletes = Edits(word, 0, new HashSet<string>());
             foreach (var delete in deletes)
             {
                 var hash = delete.GetHashCode();
@@ -40,6 +40,7 @@ namespace spell_check.SpelingClasses
                     }
                     else
                     {
+                        //TODO
                         return value[0];
                     }
                 }
@@ -47,31 +48,18 @@ namespace spell_check.SpelingClasses
             return "Not found";
         }
 
-        private HashSet<string> GenerateEditsForWord(string word, string editedWord, HashSet<string> set)
+        private HashSet<string> Edits(string word, int distance, HashSet<string> set)
         {
-            var deletes = editedWord != null ? Deletes(editedWord) : Deletes(word);
-            for (int i = 0; i < deletes.Length; i++)
-            {
-                var distance = DamerauLevenshtein.Distance(word, deletes[i]);
-                if (distance > _editDistance || string.IsNullOrWhiteSpace(deletes[i]))
-                {
-                    break;
-                }
-
-                set.Add(deletes[i]);
-                GenerateEditsForWord(word, deletes[i], set);
-            }
-            return set;
-        }
-
-        private string[] Deletes(string word)
-        {
-            var array = new string[word.Length];
+            distance++;
             for (int i = 0; i < word.Length; i++)
             {
-                array[i] = word.Remove(i, 1);
+                var edited = word.Remove(i, 1);
+                if (set.Add(edited))
+                {
+                    if (distance < _editDistance) Edits(edited, distance, set);
+                }
             }
-            return array;
+            return set;
         }
 
         private void LoadFrequencies()
@@ -83,7 +71,7 @@ namespace spell_check.SpelingClasses
                 if (wordF.Length < 2) continue;
                 if (long.Parse(wordF[1]) < Threshold) continue;
                 _generatedFrequencies.Add(wordF[0], long.Parse(wordF[1]));
-                var deletes = GenerateEditsForWord(wordF[0], null, new HashSet<string>());
+                var deletes = Edits(wordF[0], 0, new HashSet<string>());
                 foreach (var delete in deletes)
                 {
                     var hash = delete.GetHashCode();

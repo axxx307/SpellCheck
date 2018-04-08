@@ -10,12 +10,8 @@ namespace spell_check
     {
         static void Main(string[] args)
         {
-            var autofac = new AutoFac();
-            var _container = autofac.AutoFacInit();
-            var spells = _container.Resolve<Spell>();
-            var words = new Words();
             var symSpell = new SymSpell(2);
-
+            
             var isRunning = true;
             while (isRunning)
             {
@@ -32,6 +28,10 @@ namespace spell_check
                     }
                     case @"\norvig":
                     {
+                        var autofac = new AutoFac();
+                        var _container = autofac.AutoFacInit();
+                        var spells = _container.Resolve<Spell>();
+                        var words = new Words();
                         Console.WriteLine("Enter the word");
                         var word = Console.ReadLine();
                         var spelling = spells.Candidates(word, words);
