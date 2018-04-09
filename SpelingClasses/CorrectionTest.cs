@@ -23,17 +23,15 @@ namespace spell_check.SpelingClasses
             return dict;
         }
 
-        public static Tuple<int, int> TestAgainstWords()
+        public static Tuple<int, int> TestAgainstWords(Func<string, string> method)
         {
             var cases = LoadData();
-            var spell = new Spell();
-            var words = new Words();
             int wrong = 0;
             int right = 0;
             for(int i = 0; i < cases.Count; i++)
             {
                 var element = cases.ElementAt(i);
-                var candidate = spell.Candidates(element.Key, words);
+                var candidate = method(element.Value);
                 if (candidate == element.Value)
                 {
                     // System.Console.WriteLine("RIGHT -- " + candidate);

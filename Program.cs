@@ -22,7 +22,7 @@ namespace spell_check
                     case @"\test":
                     {
                         Console.WriteLine("Starting tests");
-                        var data = CorrectionTest.TestAgainstWords();
+                        var data = CorrectionTest.TestAgainstWords(symSpell.LookUp);
                         Console.WriteLine($"Right: {data.Item1}; Wrong: {data.Item2}");
                         continue;
                     }
