@@ -40,7 +40,7 @@ namespace spell_check
                     }
                     case @"\symspell":
                     {
-                        Console.WriteLine("Enter the word");
+                        Console.WriteLine("You can start typing");
                         var word = Console.ReadLine();
                         var spelling = symSpell.LookUp(word);
                         Console.WriteLine($"Corrected to: {spelling}");

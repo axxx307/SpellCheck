@@ -40,8 +40,8 @@ namespace spell_check.SpelingClasses
                     }
                     else
                     {
-                        //TODO
-                        return value[0];
+                        var freqs = _generatedFrequencies.Where(f=>value.FirstOrDefault() == f.Key).Max();
+                        return freqs.Key;
                     }
                 }
             }
@@ -80,7 +80,7 @@ namespace spell_check.SpelingClasses
                     {
                         var extendedEdits = new string[value.Length + 1];
                         Array.Copy(value, extendedEdits, value.Length);
-                        extendedEdits[value.Length] = delete;
+                        extendedEdits[value.Length] = wordF[0];
                         _generatedEdtis[hash] = extendedEdits;
                     }
                     else
