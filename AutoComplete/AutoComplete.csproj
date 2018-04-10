@@ -1,8 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\SpellCheckLibrary\SpellCheckLibrary.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="4.4.0" />
+    <PackageReference Include="Castle.Core" Version="4.2.1" />
+  </ItemGroup>
 
 </Project>
