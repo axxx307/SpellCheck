@@ -11,3 +11,11 @@ bin/Debug/netcoreapp2.0/spell check.runtimeconfig.json
 AutoComplete/obj/Debug/netcoreapp2.0/AutoComplete.csproj.FileListAbsolute.txt
 AutoComplete/obj/Debug/netcoreapp2.0/AutoComplete.AssemblyInfoInputs.cache
 AutoComplete/obj/Debug/netcoreapp2.0/AutoComplete.csproj.CoreCompileInputs.cache
+AutoComplete/obj/AutoComplete.csproj.nuget.g.props
+AutoComplete/obj/AutoComplete.csproj.nuget.cache
+AutoComplete/obj/AutoComplete.csproj.nuget.g.targets
+AutoComplete/obj/project.assets.json
+AutoComplete/obj/Debug/netcoreapp2.0/AutoComplete.AssemblyInfo.cs
+AutoComplete/obj/Debug/netcoreapp2.0/AutoComplete.csprojResolveAssemblyReference.cache
+SpellCheckLibrary/obj/SpellCheckLibrary.csproj.nuget.cache
+SpellCheckLibrary/obj/SpellCheckLibrary.csproj.nuget.g.props
