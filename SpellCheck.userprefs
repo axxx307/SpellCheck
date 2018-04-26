@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{40F1EABF-4C86-4875-8971-53239BAD2171}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SpellCheckLibrary/SpelingClasses/Trie.cs">
+    <Files>
+      <File FileName="SpellCheckLibrary/SpelingClasses/SymSpell.cs" Line="24" Column="10" />
+      <File FileName="SpellCheckLibrary/SpelingClasses/Trie.cs" Line="30" Column="34" />
+      <File FileName="AutoComplete/Program.cs" Line="63" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/markparfenov/Desktop/SpellCheck/AutoComplete/Program.cs" relfile="AutoComplete/Program.cs" line="16" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.AutoComplete PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

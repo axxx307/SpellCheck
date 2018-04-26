@@ -14,6 +14,9 @@ namespace spell_check.SpelingClasses
         private int Threshold = 0;
         private Dictionary<int, string[]> _generatedEdtis;
         private Dictionary<string, long> _generatedFrequencies;
+
+        public Dictionary<string, long> GeneratedFrequencies {get; private set;}
+
         public SymSpell(int editDistance)
         {
             _editDistance = editDistance;
@@ -21,6 +24,7 @@ namespace spell_check.SpelingClasses
             _generatedFrequencies = new Dictionary<string, long>();
             LoadFrequencies();
             Console.WriteLine("SymSpell files loaded successfully");
+            GeneratedFrequencies = _generatedFrequencies;
         }
 
         public string LookUp(string word)
@@ -64,7 +68,7 @@ namespace spell_check.SpelingClasses
 
         private void LoadFrequencies()
         {
-            var lines = File.ReadAllLines(@"TextFiles/frequency_dictionary.txt");
+            var lines = File.ReadAllLines(@"../SpellCheckLibrary/TextFiles/frequency_dictionary.txt");
             for (long i = 0; i < lines.Length; i++)
             {
                 var wordF = lines[i].Split(" ");
