@@ -16,7 +16,7 @@ namespace AutoComplete
             var trie = new Trie();
             foreach (var word in symSpell.GeneratedFrequencies)
             {
-                trie.Add(word.Key, word.Value);
+                trie.Add(word.Key, word.Key, word.Value);
             }
             Console.WriteLine("autocomplete loaded succesfully");
             while(true)

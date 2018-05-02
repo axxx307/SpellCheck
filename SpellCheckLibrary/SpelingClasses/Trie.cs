@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -51,31 +52,28 @@ namespace SpellCheckLibrary.SpelingClasses
         {
             TrieNode nodeWord = new TrieNode();
             var modified = word.Clone().ToString();
+            //Find needed word iterating over letters
             while(modified.Length != 0)
             {
                 nodeWord =  _currentNode.Children.First(x=>x.Value == modified[0].ToString());
                 modified = modified.Remove(0, 1);
                 _currentNode = nodeWord;
             }
-            if (nodeWord.Children != null && nodeWord.Children.Any(x=>x.Words.Count > 0))
-            {
-                int depth = 0;
-                HashSet<string> suggestions = new HashSet<string>() {word};
-                while(depth != 2)
-                {
-                    depth++;
-                    var childValues = _currentNode.Children.Where(f=>f.IsWord).Select(x=> x.Value);
-                    foreach (var item in suggestions)
-                    {
-                        childValues.Select(f=> suggestions.Add(item + f));
-                    }
-                    
-                }
-                _currentNode = _node;
-                return suggestions;
-            }
             _currentNode = _node;
-            return nodeWord.Children.Where(f=>f.IsWord).OrderBy(f=>f.Frequency).Select(z=> word +z.Value).Take(3).ToHashSet();
+            try
+            {
+                HashSet<TrieNodeWord> set = new HashSet<TrieNodeWord>();
+                //Find closest set of words
+                set.UnionWith(nodeWord.Children.SelectMany(f=>f.Children).SelectMany(f=>f.Words).ToHashSet());
+                //Find closest child`s set of words
+                set.UnionWith(nodeWord.Children.SelectMany(z=>z.Words).ToHashSet());
+                return set.OrderByDescending(f=>f.Frequency).Select(z=>z.Word).ToHashSet();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
     }
 }
